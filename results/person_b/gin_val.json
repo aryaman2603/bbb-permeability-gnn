@@ -1,0 +1,15 @@
+{
+  "model": "gin",
+  "split": "val",
+  "metrics": {
+    "roc_auc": 0.8799,
+    "accuracy": 0.823529,
+    "precision": 0.893519,
+    "recall": 0.861607,
+    "f1": 0.877273,
+    "tn": 59,
+    "fp": 23,
+    "fn": 31,
+    "tp": 193
+  }
+}

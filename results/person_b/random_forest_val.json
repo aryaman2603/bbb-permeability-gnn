@@ -1,0 +1,15 @@
+{
+  "model": "random_forest",
+  "split": "val",
+  "metrics": {
+    "roc_auc": 0.903365,
+    "accuracy": 0.862745,
+    "precision": 0.885593,
+    "recall": 0.933036,
+    "f1": 0.908696,
+    "tn": 55,
+    "fp": 27,
+    "fn": 15,
+    "tp": 209
+  }
+}
