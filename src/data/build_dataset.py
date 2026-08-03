@@ -1,6 +1,4 @@
-"""Build and freeze the train/val/test PyG datasets.
-Run this once; commit the resulting .pt files to data/processed/.
-"""
+
 
 from pathlib import Path
 import torch

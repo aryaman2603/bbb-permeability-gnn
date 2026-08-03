@@ -1,7 +1,4 @@
-"""Analyze atom/bond type frequency across the full BBBP dataset
-to pick data-driven vocabularies for featurize.py, instead of
-assuming a generic drug-like default.
-"""
+
 
 from collections import Counter
 import pandas as pd

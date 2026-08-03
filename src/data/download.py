@@ -1,4 +1,4 @@
-"""Download and inspect the BBBP dataset via PyTorch Geometric's MoleculeNet loader."""
+
 
 from pathlib import Path
 from torch_geometric.datasets import MoleculeNet
@@ -25,7 +25,6 @@ def inspect(dataset):
     print(f"  x shape: {sample.x.shape}")
     print(f"  edge_index shape: {sample.edge_index.shape}")
 
-    # Check for label distribution / class imbalance
     labels = [int(d.y.item()) for d in dataset]
     pos = sum(labels)
     print(f"\nLabel distribution: {pos} positive / {len(labels) - pos} negative "

@@ -1,6 +1,4 @@
-"""SMILES -> PyG Data objects, using RDKit featurization.
-Skips and logs any SMILES that fail to parse.
-"""
+
 
 from pathlib import Path
 import pandas as pd
@@ -11,7 +9,7 @@ from rdkit import RDLogger
 
 from src.data.featurize import atom_features, bond_features
 
-RDLogger.DisableLog("rdApp.*")  # suppress RDKit parse warnings; we log failures ourselves
+RDLogger.DisableLog("rdApp.*")  
 
 CSV_PATH = Path("data/raw/bbbp/raw/BBBP.csv")  
 

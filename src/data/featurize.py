@@ -1,25 +1,16 @@
-"""RDKit-based atom/bond featurization for BBBP molecules.
 
-Builds explicit, documented feature vectors — independent of PyG's
-default MoleculeNet featurizer.
-
-Vocabularies below are data-driven: derived from frequency analysis
-of the actual BBBP dataset (see analyze_features.py), not generic
-defaults. Rare categories (<0.1% occurrence) are folded into an
-"other" bucket rather than given a dedicated one-hot slot.
-"""
 
 from rdkit import Chem
 import torch
 
-# --- Vocabularies for one-hot encodings (data-driven, see analyze_features.py) ---
-ATOM_LIST = ['C', 'N', 'O', 'Cl', 'S', 'F', 'Br']  # + "other" bucket (covers 99.84% of atoms)
-DEGREE_LIST = [0, 1, 2, 3, 4]  # all meaningfully represented, no "other" needed in practice
+
+ATOM_LIST = ['C', 'N', 'O', 'Cl', 'S', 'F', 'Br']  
+DEGREE_LIST = [0, 1, 2, 3, 4]  
 HYBRIDIZATION_LIST = [
     Chem.rdchem.HybridizationType.SP,
     Chem.rdchem.HybridizationType.SP2,
     Chem.rdchem.HybridizationType.SP3,
-]  # + "other" bucket (SP3D/SP3D2 have zero occurrences in BBBP)
+] 
 
 BOND_TYPE_LIST = [
     Chem.rdchem.BondType.SINGLE,
@@ -48,7 +39,7 @@ def atom_features(atom: Chem.Atom) -> list[float]:
     features.append(float(atom.GetIsAromatic()))                       # 1
     features.append(float(atom.IsInRing()))                            # 1
     features.append(float(atom.GetTotalNumHs()))                       # 1
-    return features  # total length: 22... see note below
+    return features  
 
 
 def bond_features(bond: Chem.Bond) -> list[float]:
@@ -62,24 +53,24 @@ def bond_features(bond: Chem.Bond) -> list[float]:
 def get_feature_dims() -> tuple[int, int]:
     """Return (node_feature_dim, edge_feature_dim) for model init."""
     node_dim = (
-        (len(ATOM_LIST) + 1)            # atom symbol one-hot + other
-        + (len(DEGREE_LIST) + 1)        # degree one-hot + other
-        + 1                              # formal charge
-        + (len(HYBRIDIZATION_LIST) + 1) # hybridization one-hot + other
-        + 1                              # aromatic
-        + 1                              # ring membership
-        + 1                              # total numH
+        (len(ATOM_LIST) + 1)            
+        + (len(DEGREE_LIST) + 1)        
+        + 1                              
+        + (len(HYBRIDIZATION_LIST) + 1) 
+        + 1                              
+        + 1                             
+        + 1                            
     )
     edge_dim = (
-        (len(BOND_TYPE_LIST) + 1)       # bond type one-hot + other
-        + 1                              # conjugated
-        + 1                              # ring membership
+        (len(BOND_TYPE_LIST) + 1)      
+        + 1                             
+        + 1                             
     )
     return node_dim, edge_dim
 
 
 if __name__ == "__main__":
-    # quick sanity check on a sample molecule
+
     smiles = "CC(C)NCC(O)COc1cccc2ccccc12"
     mol = Chem.MolFromSmiles(smiles)
     print(f"SMILES: {smiles}")
