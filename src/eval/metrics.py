@@ -1,20 +1,4 @@
-"""Shared evaluation script — single source of truth for all 5 models.
 
-IMPORTANT: Both Person A and Person B import from this file.
-Never calculate metrics anywhere else — use evaluate_model() here so
-all model results are directly comparable.
-
-Usage
------
-    from src.eval.metrics import evaluate_model, print_metrics, save_metrics
-
-    y_true = np.array([0, 1, 1, 0, ...])   # ground truth labels
-    y_prob = np.array([0.1, 0.9, 0.7, ...]) # predicted probabilities for BBB+
-
-    metrics = evaluate_model(y_true, y_prob)
-    print_metrics(metrics, model_name="GAT", split="test")
-    save_metrics(metrics, model_name="gat", split="test", out_dir=Path("results/person_b"))
-"""
 
 import json
 import numpy as np
@@ -73,9 +57,7 @@ def evaluate_model(
 def print_metrics(metrics: dict, model_name: str = "", split: str = "test") -> None:
     """Pretty-print a metrics dict to stdout."""
     header = f"{model_name} — {split.upper()}" if model_name else split.upper()
-    print(f"\n{'='*52}")
     print(f"  {header}")
-    print(f"{'='*52}")
     print(f"  ROC-AUC  : {metrics['roc_auc']:.4f}")
     print(f"  Accuracy : {metrics['accuracy']:.4f}")
     print(f"  Precision: {metrics['precision']:.4f}")

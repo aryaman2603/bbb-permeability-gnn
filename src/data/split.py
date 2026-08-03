@@ -1,6 +1,4 @@
-"""Scaffold-based train/val/test split (70/15/15, seed=42).
-Groups molecules by Murcko scaffold so no scaffold appears in more than one split.
-"""
+
 
 import random
 from collections import defaultdict
@@ -26,9 +24,9 @@ def scaffold_split(data_list, seed: int = SEED):
         scaffold = get_scaffold(data.smiles)
         scaffold_to_indices[scaffold].append(idx)
 
-    # Sort scaffold groups by size, descending (largest groups placed first)
+
     scaffold_groups = list(scaffold_to_indices.values())
-    random.Random(seed).shuffle(scaffold_groups)  # shuffle ties for reproducibility
+    random.Random(seed).shuffle(scaffold_groups) 
     scaffold_groups.sort(key=len, reverse=True)
 
     n_total = len(data_list)
@@ -57,7 +55,6 @@ if __name__ == "__main__":
     print(f"Val:   {len(val_idx)} ({len(val_idx)/len(data_list):.1%})")
     print(f"Test:  {len(test_idx)} ({len(test_idx)/len(data_list):.1%})")
 
-    # sanity check: label balance per split
     for name, idxs in [("Train", train_idx), ("Val", val_idx), ("Test", test_idx)]:
         labels = [data_list[i].y.item() for i in idxs]
         pos = sum(labels)
