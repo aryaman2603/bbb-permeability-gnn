@@ -2,7 +2,7 @@
 
 Predicting Blood-Brain Barrier (BBB) permeability of drug-like molecules using Graph Attention Networks (GAT), Graph Isomorphism Networks (GIN), and a Random Forest baseline -- trained on the BBBP benchmark dataset.
 
----
+----
 
 ## Table of Contents
 
