@@ -2,14 +2,14 @@
   "model": "gat",
   "split": "val",
   "metrics": {
-    "roc_auc": 0.879192,
-    "accuracy": 0.777778,
-    "precision": 0.943182,
-    "recall": 0.741071,
-    "f1": 0.83,
-    "tn": 72,
-    "fp": 10,
-    "fn": 58,
-    "tp": 166
+    "roc_auc": 0.891278,
+    "accuracy": 0.80719,
+    "precision": 0.936508,
+    "recall": 0.790179,
+    "f1": 0.857143,
+    "tn": 70,
+    "fp": 12,
+    "fn": 47,
+    "tp": 177
   }
 }

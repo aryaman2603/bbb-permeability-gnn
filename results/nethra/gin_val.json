@@ -2,14 +2,14 @@
   "model": "gin",
   "split": "val",
   "metrics": {
-    "roc_auc": 0.8799,
-    "accuracy": 0.823529,
-    "precision": 0.893519,
-    "recall": 0.861607,
-    "f1": 0.877273,
-    "tn": 59,
-    "fp": 23,
-    "fn": 31,
-    "tp": 193
+    "roc_auc": 0.893075,
+    "accuracy": 0.849673,
+    "precision": 0.900901,
+    "recall": 0.892857,
+    "f1": 0.896861,
+    "tn": 60,
+    "fp": 22,
+    "fn": 24,
+    "tp": 200
   }
 }
