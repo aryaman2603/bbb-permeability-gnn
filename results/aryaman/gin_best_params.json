@@ -1,0 +1,12 @@
+{
+  "model": "gin",
+  "best_val_auc": 0.9065766550522648,
+  "best_params": {
+    "hidden_channels": 128,
+    "num_layers": 2,
+    "dropout": 0.10858247618452793,
+    "lr": 0.000190886307740353,
+    "weight_decay": 0.00015260265767655257,
+    "batch_size": 16
+  }
+}

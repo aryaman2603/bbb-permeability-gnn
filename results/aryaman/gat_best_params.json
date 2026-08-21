@@ -1,0 +1,13 @@
+{
+  "model": "gat",
+  "best_val_auc": 0.9083188153310104,
+  "best_params": {
+    "hidden_channels": 64,
+    "num_layers": 4,
+    "dropout": 0.14035169193439362,
+    "lr": 0.0005696045381779935,
+    "weight_decay": 0.00019377250471435938,
+    "batch_size": 32,
+    "num_heads": 8
+  }
+}

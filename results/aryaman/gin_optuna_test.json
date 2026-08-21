@@ -1,0 +1,15 @@
+{
+  "model": "gin_optuna",
+  "split": "test",
+  "metrics": {
+    "roc_auc": 0.900107,
+    "accuracy": 0.869281,
+    "precision": 0.921739,
+    "recall": 0.905983,
+    "f1": 0.913793,
+    "tn": 54,
+    "fp": 18,
+    "fn": 22,
+    "tp": 212
+  }
+}

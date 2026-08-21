@@ -1,0 +1,15 @@
+{
+  "model": "gat_optuna",
+  "split": "val",
+  "metrics": {
+    "roc_auc": 0.891278,
+    "accuracy": 0.800654,
+    "precision": 0.940541,
+    "recall": 0.776786,
+    "f1": 0.850856,
+    "tn": 71,
+    "fp": 11,
+    "fn": 50,
+    "tp": 174
+  }
+}
