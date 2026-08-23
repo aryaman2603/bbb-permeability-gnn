@@ -1,0 +1,15 @@
+{
+  "model": "random_forest_b3db_external",
+  "split": "external",
+  "metrics": {
+    "roc_auc": 0.896389,
+    "accuracy": 0.797231,
+    "precision": 0.772981,
+    "recall": 0.925771,
+    "f1": 0.842505,
+    "tn": 1565,
+    "fp": 978,
+    "fn": 267,
+    "tp": 3330
+  }
+}

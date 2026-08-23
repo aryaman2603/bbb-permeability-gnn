@@ -1,0 +1,15 @@
+{
+  "model": "gin_b3db_external",
+  "split": "external",
+  "metrics": {
+    "roc_auc": 0.884412,
+    "accuracy": 0.808306,
+    "precision": 0.819767,
+    "recall": 0.862385,
+    "f1": 0.840537,
+    "tn": 1861,
+    "fp": 682,
+    "fn": 495,
+    "tp": 3102
+  }
+}

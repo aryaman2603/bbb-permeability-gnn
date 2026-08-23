@@ -1,0 +1,15 @@
+{
+  "model": "gat_b3db_external",
+  "split": "external",
+  "metrics": {
+    "roc_auc": 0.869977,
+    "accuracy": 0.769381,
+    "precision": 0.856256,
+    "recall": 0.728663,
+    "f1": 0.787324,
+    "tn": 2103,
+    "fp": 440,
+    "fn": 976,
+    "tp": 2621
+  }
+}

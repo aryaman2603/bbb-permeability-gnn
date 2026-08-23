@@ -50,16 +50,23 @@ def explain_molecule(explainer, data):
 
 def get_node_scores(explanation):
     """
-    Extract one importance score per atom.
+    Extract one importance score per atom, by summing feature-level
+    importances across each atom's 22-dim feature mask.
     """
 
-    return (
+    node_mask = (
         explanation.node_mask
-        .squeeze()
         .detach()
         .cpu()
         .numpy()
     )
+
+    if node_mask.ndim == 2:
+        # node_mask_type="attributes" -> [num_atoms, num_features]
+        # collapse to one score per atom
+        return node_mask.sum(axis=1)
+
+    return node_mask.squeeze()
 
 
 def get_edge_scores(explanation):
