@@ -9,6 +9,8 @@ from torch_geometric.loader import DataLoader
 
 from src.models.gat import GATClassifier
 from src.models.gin import GINClassifier
+from src.models.gcn import GCNClassifier
+from src.models.graphsage import GraphSAGEClassifier
 from src.eval.metrics import evaluate_model, print_metrics, save_metrics
 
 SEED = 42
@@ -66,8 +68,22 @@ def build_model(model_name: str, cfg: dict) -> nn.Module:
             dropout=cfg["dropout"],
             edge_dim=7,
         )
+    elif model_name == "gcn":
+        return GCNClassifier(
+            in_channels=22,
+            hidden_channels=cfg["hidden_channels"],
+            num_layers=cfg["num_layers"],
+            dropout=cfg["dropout"],
+        )
+    elif model_name == "graphsage":
+        return GraphSAGEClassifier(
+            in_channels=22,
+            hidden_channels=cfg["hidden_channels"],
+            num_layers=cfg["num_layers"],
+            dropout=cfg["dropout"],
+        )
     else:
-        raise ValueError(f"Unknown model: '{model_name}'. Choose 'gat' or 'gin'.")
+        raise ValueError(f"Unknown model: '{model_name}'.")
 
 
 def train_one_epoch(
@@ -245,9 +261,9 @@ if __name__ == "__main__":
     )
     parser.add_argument(
         "--model",
-        choices=["gat", "gin"],
+        choices=["gat", "gin", "gcn", "graphsage"],
         required=True,
-        help="Which GNN architecture to train: 'gat' or 'gin'",
+        help="Which GNN architecture to train: 'gat', 'gin', 'gcn', or 'graphsage'",
     )
     args = parser.parse_args()
     train(args.model)

@@ -12,6 +12,8 @@ from torch_geometric.loader import DataLoader
 
 from src.models.gat import GATClassifier
 from src.models.gin import GINClassifier
+from src.models.gcn import GCNClassifier
+from src.models.graphsage import GraphSAGEClassifier
 from src.eval.metrics import evaluate_model, print_metrics, save_metrics
 
 SEED = 42
@@ -54,6 +56,20 @@ def build_model(model_name: str, params: dict) -> nn.Module:
             num_layers=params["num_layers"],
             dropout=params["dropout"],
             edge_dim=7,
+        )
+    elif model_name == "gcn":
+        return GCNClassifier(
+            in_channels=22,
+            hidden_channels=params["hidden_channels"],
+            num_layers=params["num_layers"],
+            dropout=params["dropout"],
+        )
+    elif model_name == "graphsage":
+        return GraphSAGEClassifier(
+            in_channels=22,
+            hidden_channels=params["hidden_channels"],
+            num_layers=params["num_layers"],
+            dropout=params["dropout"],
         )
     raise ValueError(f"Unknown model: {model_name}")
 
@@ -217,7 +233,7 @@ def run_study(model_name: str, timeout_seconds: int, train_data, val_data, test_
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--model", choices=["gat", "gin", "both"], default="both")
+    parser.add_argument("--model", choices=["gat", "gin", "gcn", "graphsage", "both"], default="both")
     parser.add_argument("--hours", type=float, default=3.0, help="Total time budget across selected model(s)")
     args = parser.parse_args()
 
