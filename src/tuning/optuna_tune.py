@@ -19,7 +19,7 @@ from src.eval.metrics import evaluate_model, print_metrics, save_metrics
 SEED = 42
 MAX_EPOCHS = 300
 TRIAL_PATIENCE = 30          # early stop within a single trial
-RESULTS_DIR = Path("results/person_b/optuna")
+RESULTS_DIR = Path("results/nethra/optuna")
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 
