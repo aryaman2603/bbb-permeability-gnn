@@ -13,7 +13,7 @@ from src.eval.metrics import evaluate_model, print_metrics, save_metrics
 
 SEED = 42
 RESULTS_DIR = Path("results/nethra")
-PARAMS_DIR = Path("results/aryaman")
+PARAMS_DIR = Path("results/nethra")
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 EPOCHS_OVERRIDE = 300
