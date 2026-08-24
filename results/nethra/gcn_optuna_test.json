@@ -1,0 +1,15 @@
+{
+  "model": "gcn_optuna",
+  "split": "test",
+  "metrics": {
+    "roc_auc": 0.889008,
+    "accuracy": 0.781046,
+    "precision": 0.941799,
+    "recall": 0.760684,
+    "f1": 0.841608,
+    "tn": 61,
+    "fp": 11,
+    "fn": 56,
+    "tp": 178
+  }
+}

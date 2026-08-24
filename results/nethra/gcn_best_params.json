@@ -1,0 +1,12 @@
+{
+  "model": "gcn",
+  "best_val_auc": 0.9005335365853658,
+  "best_params": {
+    "hidden_channels": 128,
+    "num_layers": 4,
+    "dropout": 0.23417861518584543,
+    "lr": 0.005373757268460843,
+    "weight_decay": 0.00037877301438245004,
+    "batch_size": 64
+  }
+}

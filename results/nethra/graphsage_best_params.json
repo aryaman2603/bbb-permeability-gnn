@@ -1,0 +1,12 @@
+{
+  "model": "graphsage",
+  "best_val_auc": 0.9055966898954704,
+  "best_params": {
+    "hidden_channels": 128,
+    "num_layers": 3,
+    "dropout": 0.26311412372223025,
+    "lr": 0.00295126164112055,
+    "weight_decay": 0.00010664992792779686,
+    "batch_size": 16
+  }
+}

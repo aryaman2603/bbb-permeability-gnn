@@ -1,0 +1,15 @@
+{
+  "model": "graphsage_optuna",
+  "split": "test",
+  "metrics": {
+    "roc_auc": 0.886633,
+    "accuracy": 0.830065,
+    "precision": 0.941748,
+    "recall": 0.82906,
+    "f1": 0.881818,
+    "tn": 60,
+    "fp": 12,
+    "fn": 40,
+    "tp": 194
+  }
+}
