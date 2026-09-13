@@ -1,0 +1,75 @@
+{
+  "model": "gcn",
+  "checkpoint": "results/nethra/gcn_best.pt",
+  "fraction": 0.2,
+  "categories": {
+    "TP": {
+      "n_molecules": 15,
+      "mean_fidelity": 0.4160930732885996,
+      "mean_sparsity": 0.17924186924186927,
+      "top_atom_types": [
+        [
+          "C",
+          54
+        ],
+        [
+          "N",
+          5
+        ]
+      ]
+    },
+    "TN": {
+      "n_molecules": 15,
+      "mean_fidelity": 0.13683906595688314,
+      "mean_sparsity": 0.18405576632511667,
+      "top_atom_types": [
+        [
+          "C",
+          88
+        ],
+        [
+          "N",
+          2
+        ],
+        [
+          "O",
+          1
+        ]
+      ]
+    },
+    "FP": {
+      "n_molecules": 11,
+      "mean_fidelity": 0.39618251587010245,
+      "mean_sparsity": 0.18391806601968863,
+      "top_atom_types": [
+        [
+          "C",
+          51
+        ],
+        [
+          "N",
+          10
+        ]
+      ]
+    },
+    "FN": {
+      "n_molecules": 15,
+      "mean_fidelity": 0.16265205045541128,
+      "mean_sparsity": 0.17986168857008983,
+      "top_atom_types": [
+        [
+          "C",
+          66
+        ],
+        [
+          "O",
+          2
+        ]
+      ]
+    }
+  },
+  "random_control": {
+    "mean_fidelity": 0.0005155622959136963,
+    "mean_sparsity": 0.18441227711033406
+  }
+}

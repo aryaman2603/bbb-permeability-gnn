@@ -1,0 +1,15 @@
+{
+  "model": "gcn_b3db_external",
+  "split": "external",
+  "metrics": {
+    "roc_auc": 0.870177,
+    "accuracy": 0.766775,
+    "precision": 0.855501,
+    "recall": 0.724215,
+    "f1": 0.784402,
+    "tn": 2103,
+    "fp": 440,
+    "fn": 992,
+    "tp": 2605
+  }
+}

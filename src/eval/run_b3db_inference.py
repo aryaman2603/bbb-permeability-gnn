@@ -104,6 +104,8 @@ def main():
     for model_name, ckpt_path in [
         ("gat", "results/nethra/gat_best.pt"),
         ("gin", "results/nethra/gin_best.pt"),
+        ("gcn", "results/nethra/gcn_best.pt"),
+        ("graphsage", "results/nethra/graphsage_best.pt")
     ]:
         print(f"\n{'='*60}\nRunning {model_name.upper()} on external B3DB set\n{'='*60}")
         model = load_model(model_name, ckpt_path).to(DEVICE)

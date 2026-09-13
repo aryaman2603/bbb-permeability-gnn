@@ -62,6 +62,12 @@ def load_model(model_name: str, ckpt_path: str, model_kwargs: dict | None = None
                     "num_layers": best_params["num_layers"],
                     "dropout": best_params["dropout"],
                 }
+            elif model_name in ("gcn", "graphsage"):
+                model_kwargs = {
+                    "hidden_channels": best_params["hidden_channels"],
+                    "num_layers": best_params["num_layers"],
+                    "dropout": best_params["dropout"],
+                }
             else:
                 model_kwargs = {}
             print(f"Loaded config from {params_file.name}: {model_kwargs}")
@@ -192,11 +198,6 @@ def run_aggregate_analysis(model_name: str, ckpt_path: str, fraction: float = 0.
 
 
 def run_random_control(model_name: str, fraction: float = 0.20, n_samples: int = 15):
-    """
-    Sanity check: explain a model with RANDOMIZED (untrained) weights on the
-    same molecules. If explanations look similarly structured to the trained
-    model's, that's a red flag GNNExplainer isn't reflecting learned behavior.
-    """
     random.seed(SEED)
     test_data = torch.load("data/processed/test.pt", weights_only=False)
     sample = random.sample(test_data, min(n_samples, len(test_data)))
@@ -207,8 +208,14 @@ def run_random_control(model_name: str, fraction: float = 0.20, n_samples: int =
     elif model_name == "gin":
         from src.models.gin import GINClassifier
         model = GINClassifier()
+    elif model_name == "gcn":
+        from src.models.gcn import GCNClassifier
+        model = GCNClassifier()
+    elif model_name == "graphsage":
+        from src.models.graphsage import GraphSAGEClassifier
+        model = GraphSAGEClassifier()
     else:
-        raise ValueError(f"Add {model_name} to run_random_control")
+        raise ValueError(f"Unknown model: {model_name}")
 
     model.to(DEVICE).eval()  # NOTE: untrained, random init weights
     explainer = create_explainer(model)
@@ -222,11 +229,14 @@ def run_random_control(model_name: str, fraction: float = 0.20, n_samples: int =
         fidelities.append(compute_fidelity(model, data, top_atoms))
         sparsities.append(len(top_atoms) / data.x.size(0))
 
+    result = {
+        "mean_fidelity": float(np.mean(fidelities)),
+        "mean_sparsity": float(np.mean(sparsities)),
+    }
     print(f"\n[RANDOM-WEIGHT CONTROL] {model_name}:")
-    print(f"  Mean fidelity: {np.mean(fidelities):.4f}")
-    print(f"  Mean sparsity: {np.mean(sparsities):.4f}")
-    print("  Compare these to the trained model's fidelity above — "
-          "if similar, explanations may not reflect learned behavior.")
+    print(f"  Mean fidelity: {result['mean_fidelity']:.4f}")
+    print(f"  Mean sparsity: {result['mean_sparsity']:.4f}")
+    return result
 
 
 if __name__ == "__main__":
@@ -236,5 +246,21 @@ if __name__ == "__main__":
     parser.add_argument("--fraction", type=float, default=0.20)
     args = parser.parse_args()
 
-    run_aggregate_analysis(args.model, args.ckpt, args.fraction)
-    run_random_control(args.model, args.fraction)
+    out_dir = Path("results/explainability")
+    out_dir.mkdir(exist_ok=True, parents=True)
+
+    aggregate_results = run_aggregate_analysis(args.model, args.ckpt, args.fraction)
+    random_control_results = run_random_control(args.model, args.fraction)
+
+    combined = {
+        "model": args.model,
+        "checkpoint": args.ckpt,
+        "fraction": args.fraction,
+        "categories": aggregate_results,
+        "random_control": random_control_results,
+    }
+
+    out_path = out_dir/f"{args.model}_explainability.json"
+    with open(out_path, "w") as f:
+        json.dump(combined, f, indent=2)
+    print(f"\nSaved explainability results to {out_path}")

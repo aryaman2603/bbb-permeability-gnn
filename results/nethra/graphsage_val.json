@@ -1,0 +1,15 @@
+{
+  "model": "graphsage",
+  "split": "val",
+  "metrics": {
+    "roc_auc": 0.883112,
+    "accuracy": 0.823529,
+    "precision": 0.920792,
+    "recall": 0.830357,
+    "f1": 0.873239,
+    "tn": 66,
+    "fp": 16,
+    "fn": 38,
+    "tp": 186
+  }
+}

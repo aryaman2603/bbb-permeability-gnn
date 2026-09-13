@@ -1,0 +1,15 @@
+{
+  "model": "graphsage_b3db_external",
+  "split": "external",
+  "metrics": {
+    "roc_auc": 0.870896,
+    "accuracy": 0.775244,
+    "precision": 0.863085,
+    "recall": 0.732555,
+    "f1": 0.792481,
+    "tn": 2125,
+    "fp": 418,
+    "fn": 962,
+    "tp": 2635
+  }
+}

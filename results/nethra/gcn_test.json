@@ -1,0 +1,15 @@
+{
+  "model": "gcn",
+  "split": "test",
+  "metrics": {
+    "roc_auc": 0.883369,
+    "accuracy": 0.761438,
+    "precision": 0.939891,
+    "recall": 0.735043,
+    "f1": 0.82494,
+    "tn": 61,
+    "fp": 11,
+    "fn": 62,
+    "tp": 172
+  }
+}

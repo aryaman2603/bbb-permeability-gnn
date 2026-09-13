@@ -1,0 +1,11 @@
+{
+  "n_molecules": 20,
+  "pairwise_jaccard": {
+    "gat_vs_gin": 0.3150574352548037,
+    "gat_vs_gcn": 0.37139957264957263,
+    "gat_vs_graphsage": 0.45766774891774886,
+    "gin_vs_gcn": 0.40742063492063496,
+    "gin_vs_graphsage": 0.42596139971139974,
+    "gcn_vs_graphsage": 0.4359009372979961
+  }
+}
