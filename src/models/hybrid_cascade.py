@@ -111,13 +111,28 @@ class HybridCascade:
 
     def predict_smiles(self, smiles_list: list[str]) -> tuple[np.ndarray, np.ndarray]:
         """Single-entry inference from raw SMILES. Returns (final_prob, routed)."""
+        detail = self.predict_smiles_detailed(smiles_list)
+        return detail["final_prob"], detail["routed"]
+
+    def predict_smiles_detailed(self, smiles_list: list[str]) -> dict:
+        """Inference with full stage trace for UI/demo purposes.
+
+        Returns dict with rf_prob, gin_prob (NaN when not routed),
+        final_prob, routed. Raises ValueError listing invalid SMILES.
+        """
+        from rdkit import Chem
         from src.data.graph_builder import smiles_to_data
         from src.features.morgan_fingerprints import smiles_to_morgan
+
+        bad = [s for s in smiles_list if Chem.MolFromSmiles(s) is None]
+        if bad:
+            raise ValueError(f"{len(bad)} invalid SMILES, e.g. {bad[0][:60]}")
 
         # RF always runs (cheap fingerprint + forest).
         X = np.stack([smiles_to_morgan(s) for s in smiles_list], axis=0)
         rf_probs = self.rf.predict_proba(X)[:, 1]
         routed = (rf_probs >= self.tau_low) & (rf_probs <= self.tau_high)
+        gin_probs = np.full_like(rf_probs, np.nan, dtype=float)
         final_prob = rf_probs.copy().astype(float)
 
         # GIN only on routed subset.
@@ -132,9 +147,11 @@ class HybridCascade:
             with torch.no_grad():
                 logit = self.gin(data.x, data.edge_index, data.edge_attr, batch)
             g = torch.sigmoid(logit).cpu().item()
+            gin_probs[i] = g
             if self.fusion == "hard" or self.fusion_model is None:
                 final_prob[i] = g
             else:
                 feats = np.array([[rf_probs[i], g]])
                 final_prob[i] = float(self.fusion_model.predict_proba(feats)[0, 1])
-        return final_prob, routed
+        return {"rf_prob": rf_probs, "gin_prob": gin_probs,
+                "final_prob": final_prob, "routed": routed}
