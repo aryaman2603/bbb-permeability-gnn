@@ -1,0 +1,5 @@
+{
+  "tau_low": 0.3,
+  "tau_high": 0.65,
+  "fusion_model": "results/hybrid/fusion_logreg.joblib"
+}
