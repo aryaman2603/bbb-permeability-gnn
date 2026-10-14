@@ -98,8 +98,3 @@ Key findings:
 - **Random Forest** delivers competitive performance (0.890 AUC) with the highest recall, showing that ECFP4 fingerprints remain a strong baseline.
 - **GAT** shows high precision but lower recall -- it is conservative in predicting BBB+ but misses more true positives.
 - The GNN vs. RF comparison suggests molecular graphs provide complementary structural information beyond circular fingerprints.
-
-### TODO
-- Develop a frontend app
-- Add more patents than research papers in the form
-- Confirm if the dataset is verified by field experts
